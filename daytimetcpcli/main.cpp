@@ -1,3 +1,4 @@
+// I page 6
 #include "../unpv13e/lib/unp.h"
 #include "iostream"
 int main(int argc, char** argv){
@@ -13,14 +14,14 @@ int main(int argc, char** argv){
     }
     bzero(&servaddr, sizeof (servaddr));
     servaddr.sin_family =  AF_INET;
-    servaddr.sin_port = htons(13);
-    if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr)<=0){
+    servaddr.sin_port =htons(8875);
+    if (inet_pton(AF_INET, "0.0.0.0", &servaddr.sin_addr)<=0){
         std::cout<<"inet_pton error for "<<argv[1]<<std::endl;
         exit(1);
     }
 
     if (connect(sockfd,(SA*)&servaddr, sizeof (servaddr))<=0){
-        std::cerr<<"connect_err"<<std::endl;
+        std::cerr<<"connect_err "<<strerror(errno)<<std::endl;
         exit(1);
     }
 
