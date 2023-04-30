@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 #include "iostream"
 #include "cstdlib"
+#include "cstring"
 #define BUFFER_LEN (64)
 
 int main(int argc, char** argv){

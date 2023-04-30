@@ -15,21 +15,21 @@ int main(int argc, char** argv){
     bzero(&servaddr, sizeof (servaddr));
     servaddr.sin_family =  AF_INET;
     servaddr.sin_port =htons(8875);
-    if (inet_pton(AF_INET, "0.0.0.0", &servaddr.sin_addr)<=0){
+    if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr)<=0){
         std::cout<<"inet_pton error for "<<argv[1]<<std::endl;
         exit(1);
     }
 
-    if (connect(sockfd,(SA*)&servaddr, sizeof (servaddr))<=0){
+    if (connect(sockfd,(SA*)&servaddr, sizeof (servaddr))<0){
         std::cerr<<"connect_err "<<strerror(errno)<<std::endl;
         exit(1);
     }
 
-    while((n = read(sockfd, recvline,MAXLINE))> 0){
+  n = read(sockfd, recvline,MAXLINE);
         recvline[n] = 0;
         if (fputs(recvline, stdout) ==EOF)
             std::cerr<<"fputs err"<<std::endl;
-    }
+
 
     if (n<0)
         std::cerr<<"read err"<<std::endl;
